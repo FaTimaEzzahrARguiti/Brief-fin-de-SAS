@@ -1,0 +1,153 @@
+#include <stdio.h>
+#include <stdbool.h>
+#include <string.h>
+ typedef struct {
+    char titre[30],description [100],date_echeance[20];
+    char priorite[20];
+}tache;
+tache t[100];
+int taille=0;
+void AjouterTache() {
+    int choix;
+printf("\nEntrez la Tache N° %d\n", taille + 1);
+
+    // Saisie du titre
+    printf("Entrez le titre :\n");
+    scanf(" %[^\n]s", t[taille].titre); // Lecture d'une ligne entière
+
+    // Saisie de la description
+    printf("Entrez la description :\n");
+    scanf(" %[^\n]s", t[taille].description); // Lecture d'une ligne entière
+
+    // Saisie de la date d'échéance
+    printf("Entrez la date d'échéance (format : JJ-MM-AAAA) :\n");
+    scanf("%s", t[taille].date_echeance);
+
+    // Saisie de la priorité avec validation
+    do {
+        printf("Donnez la priorite (1. High / 2. Low):\n");
+        scanf("%d", &choix);
+        switch (choix) {
+            case 1:
+                strcpy(t[taille].priorite, "high");
+                break;
+            case 2:
+                strcpy(t[taille].priorite, "low");
+                break;
+            default:
+                printf("Choix invalide ! Réessayez.\n");
+        }
+    } while (choix != 1 && choix != 2);
+
+    // Incrémentation de la taille
+    taille++;
+    printf("Tache ajoutée avec succès !\n");
+}
+void afficherTache(){
+    if(taille==0){
+        printf("Aucune valeur a afficher");
+        return;
+    }
+        for(int i=0;i<taille;i++){
+            printf("Les informations de tache N°:%d\n",i+1);
+            printf("Titre:%s\n",t[i].titre);
+            printf("Description:%s\n",t[i].description);
+            printf("Date d'echeance:%s\n",t[i].date_echeance);
+            printf("Priorite:%s\n",t[i].priorite);
+        }
+
+}
+
+void modifierTache() {
+    int M, choix;
+printf("\nEntrez la Tache a modifier:");
+scanf("%d",&M);
+ if (M < 1 || M > taille) {
+        printf("Tache invalide.\n");
+        return;
+    }
+    M--;
+    // Saisie du titre
+    printf("Entrez le titre :\n");
+    scanf(" %[^\n]s", t[M].titre); // Lecture d'une ligne entière
+
+    // Saisie de la description
+    printf("Entrez la description :\n");
+    scanf(" %[^\n]s", t[M].description); // Lecture d'une ligne entière
+
+    // Saisie de la date d'échéance
+    printf("Entrez la date d'échéance (format : JJ-MM-AAAA) :\n");
+    scanf("%s", t[M].date_echeance);
+
+    // Saisie de la priorité avec validation
+    do {
+        printf("Donnez la priorite (1. High / 2. Low):\n");
+        scanf("%d", &choix);
+        switch (choix) {
+            case 1:
+                strcpy(t[M].priorite, "high");
+                break;
+            case 2:
+                strcpy(t[M].priorite, "low");
+                break;
+            default:
+                printf("Choix invalide ! Réessayez.\n");
+        }
+    } while (choix != 1 && choix != 2);
+    printf("Tache ajoutée avec succès !\n");
+}
+
+void supprimerTache() {
+    int z;
+    printf("Entrez le numéro de la tache a supprimer (1 à %d): ", taille);
+    scanf("%d", &z);
+    if (z < 1 || z > taille) {
+        printf("Tache invalide.\n");
+        return;
+    }
+        for (int i = z; i < taille - 1; i++) {
+        t[i] = t[i + 1];
+    }
+    taille--;
+    printf("Tache supprimer avec succes.\n");
+}
+
+void FiltrerTache(){
+    
+}
+int main()
+{
+    //MENU//
+
+    int choix;
+    int taille=0;
+    bool continuer= true;
+    tache t[100];
+    while(continuer){
+        printf("\n=== Menu ===\n");
+        printf("1. Ajouter une tache\n");
+        printf("2. Afficher une tache:\n");
+        printf("3. Modifier une tache:\n");
+        printf("4. Supprimer une tache:\n");
+        printf("5. Filtrer les taches par priorite:\n");
+        printf("Entrez votre choix : ");
+        scanf("%d",&choix);
+
+
+    switch (choix) {
+  case 1:
+    AjouterTache();
+    break;
+  case 2:
+    afficherTache();
+    break;
+  case 3:
+    modifierTache();
+    break;
+  case 4:
+    supprimerTache(t,taille);
+    break;
+  default:
+    // code block
+}
+}}
